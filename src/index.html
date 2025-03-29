@@ -6,8 +6,75 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <app-root></app-root>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <app-root> 
+    </app-root>
+    <div class="bg-white rounded-xl shadow-lg p-6">
+   
+      <div id="display" class="mb-4 text-right text-2x1 font-semibold border border-gray-200 p-4 rounded">
+        0
+      </div>
+      
+      <div class="grid grid-cols-12 gap-5">
+        <button class="bg-red-500 text-white py-5 rounded hover:bg-red-600 col-span-3" onclick="limpar()">C</button>
+
+
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('7')">7</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('8')">8</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('9')">9</button>
+        <button class="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 col-span-3" onclick="adicionar('/')">÷</button>
+  
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('4')">4</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('5')">5</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('6')">6</button>
+        <button class="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 col-span-3" onclick="adicionar('*')">×</button>
+
+  
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('1')">1</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('2')">2</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('3')">3</button>
+        <button class="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 col-span-3" onclick="adicionar('+')">+</button>
+       
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('0')">0</button>
+        <button class="bg-gray-200 py-2 rounded hover:bg-gray-300 col-span-3" onclick="adicionar('.')">.</button>
+        <button class="bg-green-500 text-white py-2 rounded hover:bg-green-600 col-span-3" onclick="calcular()">=</button>   
+
+        <button class="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 col-span-3" onclick="adicionar('-')">−</button>
+      </div>
+    </div>
+  
+    <script>
+      let expressao = "";
+  
+      function adicionar(valor) {
+        if (expressao === "0") expressao = "";
+        expressao += valor;
+        atualizarDisplay();
+      }
+  
+      function limpar() {
+        expressao = "";
+        atualizarDisplay("0");
+      }
+  
+      function calcular() {
+        try {
+          const resultado = eval(expressao);
+          expressao = resultado.toString();
+          atualizarDisplay();
+        } catch {
+          atualizarDisplay("Erro");
+          expressao = "";
+        }
+      }
+  
+      function atualizarDisplay(valor) {
+        document.getElementById("display").textContent = valor || expressao;
+      }
+    </script>
+  
+
 </body>
 </html>
